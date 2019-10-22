@@ -90,20 +90,21 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
-const int analogInPin = A0;  // Water Sensor Input
+const int water_pin = A0;  // Water Sensor Input
 const int LED_R = 8;
 const int LED_G = 9;
 const int LED_B = 10;
-const int trig = 2;
-const int echo = 3;
+const int ir_height = 3;
 const int buzz = 6;
 const int human = 4;
-int sensorValue = 0;        // value read from the water sensor
+const int light_pin = A1;
 Servo watering;
 int ser_pos = 0;
 LiquidCrystal_I2C lcd(0x3f,16,2);
 int tick = 0;
 int lcd_stat = 0;
+float avg[10];
+int song_played=0;
 
 void setup() {
   Serial.begin(9600);
@@ -111,52 +112,17 @@ void setup() {
   pinMode(LED_G, OUTPUT);
   pinMode(LED_B, OUTPUT);
   pinMode(human, INPUT);
+  pinMode(ir_height, INPUT);
   watering.attach(5);
   lcd.begin();
   lcd.noBacklight();
-}
-
-float get_height(){
-  digitalWrite(trig, LOW);
-  digitalWrite(echo, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trig, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trig, LOW);
-
-  // echoPin 이 HIGH를 유지한 시간을 저장 한다.
-  unsigned long duration = pulseIn(echo, HIGH); 
-  // HIGH 였을 때 시간(초음파가 보냈다가 다시 들어온 시간)을 가지고 거리를 계산 한다.
-  float distance = 15.0 - ((float)(340 * duration) / 10000) / 2;  
-  if (distance < 0) distance = 0.0;
-  return distance;
-}
-int get_water(){
-  sensorValue = analogRead(analogInPin);
-  if(sensorValue > 550) {
-    digitalWrite(LED_R,LOW);
-    digitalWrite(LED_B,HIGH);
-    watering.write(90);
-    return 0;
-  }
-  else if (sensorValue <500) {
-    watering.write(0);
-    digitalWrite(LED_R,HIGH);
-    digitalWrite(LED_B,LOW);
-    return 2;
-  }
-  else {
-    digitalWrite(LED_R,HIGH);
-    digitalWrite(LED_B,HIGH);
-    return 1;
-  }
-  return sensorValue;
 }
 void song(){
   int note_4 = 260;
   int note_2 = note_4*2;
   int note_8 = note_4/2;
   int note_16 = note_8/2;
+  /*
   tone(buzz,NOTE_F4);
   delay(note_4+note_8);
   noTone(buzz);
@@ -390,6 +356,7 @@ void song(){
   noTone(buzz);
   delay(50);
   //그 이름 용감하다 대 한 육군
+  */
   tone(buzz,NOTE_A4);
   delay(note_8+note_16);  
   noTone(buzz);
@@ -588,6 +555,33 @@ void song(){
   //우리는 영원한 조국의 방패
 }
 
+
+float get_height(){
+  if(digitalRead(ir_height) == HIGH) return 0;
+  return 1;
+}
+int get_water(){  // 이상 상태면 1 정상이면 0
+  int sensorValue;
+  sensorValue = analogRead(water_pin);
+  Serial.print("Water Sensor: ");
+  Serial.println(sensorValue);
+  if(sensorValue > 550) {
+    watering.write(90);
+    return 0;
+  }
+  else if (sensorValue <500) {
+    watering.write(0);
+    return 1;
+  }
+}
+int get_light(){
+  int sensorValue;
+  sensorValue = analogRead(light_pin);
+  Serial.print("Light Sensor: ");
+  Serial.println(sensorValue);
+  if(sensorValue > 500) return 1;
+  else return 0;
+}
 int get_human(){
  if (digitalRead(human) == HIGH) return 1;
  else return 0;
@@ -596,23 +590,51 @@ int get_human(){
 void loop() {
   tick++;
   int water_sensor = get_water();
+  int light_sensor = get_light();
+  int h = get_height();
   
-  float h = get_height();
-  //if(h > 10.0) song();
-  lcd.setCursor(0,0);
-  lcd.print("Water:");;
-  lcd.setCursor(6,0);
-  lcd.print("   ");
-  lcd.setCursor(6,0);
-  lcd.print(water_sensor);
-
   lcd.setCursor(0,1);
-  lcd.print("Height:");;
-  lcd.setCursor(7,1);
-  lcd.print("      ");
-  lcd.setCursor(7,1);
-  lcd.print(h);
-  lcd.setCursor(15,0);
+  if(h == 1){
+    lcd.print("Hello, world!");
+    digitalWrite(LED_G,HIGH);
+    digitalWrite(LED_R,LOW);
+    digitalWrite(LED_B,LOW);
+    if(song_played == 0) {
+      song_played = 1;
+      song();
+    }
+  }
+  else{
+    lcd.print("Growing...");
+    digitalWrite(LED_G,LOW);
+    song_played = 0;
+    if(water_sensor == 1) {
+      if(light_sensor == 0) noTone(buzz);
+      else tone(buzz,131);
+      digitalWrite(LED_R, HIGH);
+      digitalWrite(LED_B, LOW);
+    }
+    else if(light_sensor == 1) {
+      tone(buzz,131);
+      digitalWrite(LED_R, HIGH);
+      digitalWrite(LED_B, LOW);
+    }
+    else{
+      noTone(buzz);
+      digitalWrite(LED_R, LOW);
+      digitalWrite(LED_B, HIGH);
+    }
+  }
+  lcd.setCursor(0,0);
+  lcd.print("Water:");
+  lcd.setCursor(6,0);
+  if(water_sensor) lcd.print("F  ");
+  else lcd.print("T  ");
+
+  lcd.print("Light:");
+  if(light_sensor) lcd.print("F");
+  else lcd.print("T");
+    
   if(get_human() == 1) {
     lcd_stat = tick;
     lcd.backlight();
@@ -620,6 +642,5 @@ void loop() {
   else if(tick - lcd_stat > 12) {
     lcd.noBacklight();
   }
-  lcd.print(get_human());
   delay(250);
 }
