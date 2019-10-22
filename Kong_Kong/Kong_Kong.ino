@@ -136,23 +136,456 @@ int get_water(){
   if(sensorValue > 550) {
     digitalWrite(LED_R,LOW);
     digitalWrite(LED_B,HIGH);
-    watering.write(0);
+    watering.write(90);
+    return 0;
   }
   else if (sensorValue <500) {
-    watering.write(90);
+    watering.write(0);
     digitalWrite(LED_R,HIGH);
     digitalWrite(LED_B,LOW);
+    return 2;
   }
   else {
     digitalWrite(LED_R,HIGH);
     digitalWrite(LED_B,HIGH);
+    return 1;
   }
   return sensorValue;
 }
 void song(){
-  int note_4 = 500;
+  int note_4 = 260;
+  int note_2 = note_4*2;
   int note_8 = note_4/2;
-  int note_16 = note_4/2;
+  int note_16 = note_8/2;
+  tone(buzz,NOTE_F4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  tone(buzz,NOTE_G4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C4);
+  delay(note_4+note_2);
+  noTone(buzz);
+  delay(50+note_4);
+  //백두산 정기뻗은 삼천리 강산
+  
+  tone(buzz,NOTE_D4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_AS4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_16+note_8);
+  tone(buzz,NOTE_G4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_2);
+  noTone(buzz);
+  delay(50+note_4);
+  // 무궁화 대한으 온 누리의 빛
+  tone(buzz,NOTE_F4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_16+note_8);
+  tone(buzz,NOTE_D5);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4);
+  tone(buzz,NOTE_A4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4);  
+  tone(buzz,NOTE_C5);
+  delay(note_8);
+  tone(buzz,NOTE_D5);
+  delay(note_8);  
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_G4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+ // 화랑의 핏줄타고 자라난 우리
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_AS4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_8);
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  tone(buzz,NOTE_C5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_F4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //그 이름 용감하다 대 한 육군
+  tone(buzz,NOTE_A4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_4/3);
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_A4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //앞으로 앞으로 용진또용진
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);
+  tone(buzz,NOTE_F4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //우리는 영원한 조국의 방패
+  tone(buzz,NOTE_C4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_E4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_4/3);
+  tone(buzz,NOTE_E4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_D4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //앞으로 앞으로 용진또용진(2)
+  tone(buzz,NOTE_D5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4/3);
+  tone(buzz,NOTE_C5);
+  delay(note_4/3);  
+  tone(buzz,NOTE_D5);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F5);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //우리는 영원한 조국의 방패
 }
 
 int get_human(){
@@ -163,13 +596,9 @@ int get_human(){
 void loop() {
   tick++;
   int water_sensor = get_water();
-  Serial.print("sensor = ");
-  Serial.println(water_sensor);
   
   float h = get_height();
-  Serial.print("Height: ");
-  Serial.println(h);
-  if(h > 10.0) song();
+  //if(h > 10.0) song();
   lcd.setCursor(0,0);
   lcd.print("Water:");;
   lcd.setCursor(6,0);
@@ -188,9 +617,9 @@ void loop() {
     lcd_stat = tick;
     lcd.backlight();
   }
-  else if(tick - lcd_stat > 6) {
+  else if(tick - lcd_stat > 12) {
     lcd.noBacklight();
   }
   lcd.print(get_human());
-  delay(500);
+  delay(250);
 }
