@@ -579,7 +579,7 @@ int get_light(){
   sensorValue = analogRead(light_pin);
   Serial.print("Light Sensor: ");
   Serial.println(sensorValue);
-  if(sensorValue > 500) return 1;
+  if(sensorValue > 740) return 1;
   else return 0;
 }
 int get_human(){
@@ -605,7 +605,7 @@ void loop() {
     }
   }
   else{
-    lcd.print("Growing...");
+    lcd.print("Growing......");
     digitalWrite(LED_G,LOW);
     song_played = 0;
     if(water_sensor == 1) {
