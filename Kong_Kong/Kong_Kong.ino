@@ -1,5 +1,7 @@
 #include <Servo.h>
+#include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
+
 #define NOTE_B0  31
 #define NOTE_C1  33
 #define NOTE_CS1 35
@@ -94,10 +96,11 @@ const int water_pin = A0;  // Water Sensor Input
 const int LED_R = 8;
 const int LED_G = 9;
 const int LED_B = 10;
-const int ir_height = 3;
+const int ir_height = 7;
 const int buzz = 6;
 const int human = 4;
 const int light_pin = A1;
+SoftwareSerial BTSerial(2,3);
 Servo watering;
 int ser_pos = 0;
 LiquidCrystal_I2C lcd(0x3f,16,2);
@@ -108,12 +111,12 @@ int song_played=0;
 
 void setup() {
   Serial.begin(9600);
+  BTSerial.begin(9600);
   pinMode(LED_R, OUTPUT);
   pinMode(LED_G, OUTPUT);
   pinMode(LED_B, OUTPUT);
   pinMode(human, INPUT);
   pinMode(ir_height, INPUT);
-  watering.attach(5);
   lcd.begin();
   lcd.noBacklight();
 }
@@ -122,339 +125,7 @@ void song(){
   int note_2 = note_4*2;
   int note_8 = note_4/2;
   int note_16 = note_8/2;
-  /*
-  tone(buzz,NOTE_F4);
-  delay(note_4+note_8);
-  noTone(buzz);
-  delay(50);
   
-  tone(buzz,NOTE_F4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_4+note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_8+note_16);
-  tone(buzz,NOTE_A4);
-  delay(note_16);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F4);
-  delay(note_8+note_16);
-  tone(buzz,NOTE_A4);
-  delay(note_16);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F4);
-  delay(note_8);
-  tone(buzz,NOTE_G4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C4);
-  delay(note_4+note_2);
-  noTone(buzz);
-  delay(50+note_4);
-  //백두산 정기뻗은 삼천리 강산
-  
-  tone(buzz,NOTE_D4);
-  delay(note_4+note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4+note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_AS4);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_A4);
-  delay(note_16+note_8);
-  tone(buzz,NOTE_G4);
-  delay(note_16);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_4+note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
- 
-  tone(buzz,NOTE_G4);
-  delay(note_8+note_16);
-  tone(buzz,NOTE_A4);
-  delay(note_16);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_4+note_2);
-  noTone(buzz);
-  delay(50+note_4);
-  // 무궁화 대한으 온 누리의 빛
-  tone(buzz,NOTE_F4);
-  delay(note_4+note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F5);
-  delay(note_4+note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F5);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_16+note_8);
-  tone(buzz,NOTE_D5);
-  delay(note_16);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_F5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_4);
-  tone(buzz,NOTE_A4);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_4);  
-  tone(buzz,NOTE_C5);
-  delay(note_8);
-  tone(buzz,NOTE_D5);
-  delay(note_8);  
-  noTone(buzz);
-  delay(50);
- 
-  tone(buzz,NOTE_G4);
-  delay(note_2);  
-  noTone(buzz);
-  delay(50);
- // 화랑의 핏줄타고 자라난 우리
-  tone(buzz,NOTE_C5);
-  delay(note_4+note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_AS4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_A4);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_A4);
-  delay(note_8);
-  tone(buzz,NOTE_F4);
-  delay(note_8);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_D5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
- 
-  tone(buzz,NOTE_C5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_C5);
-  delay(note_2);
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4);  
-  tone(buzz,NOTE_C5);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
- 
-  tone(buzz,NOTE_F4);
-  delay(note_2);  
-  noTone(buzz);
-  delay(50);
-  //그 이름 용감하다 대 한 육군
-  */
-  tone(buzz,NOTE_A4);
-  delay(note_8+note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_A4);
-  delay(note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_A4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_D5);
-  delay(note_8+note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_A4);
-  delay(note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_A4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_A4);
-  delay(note_4/3);
-  tone(buzz,NOTE_G4);
-  delay(note_4/3);  
-  tone(buzz,NOTE_A4);
-  delay(note_4/3);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_D4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_D4);
-  delay(note_2);  
-  noTone(buzz);
-  delay(50);
-  //앞으로 앞으로 용진또용진
-  tone(buzz,NOTE_G4);
-  delay(note_8+note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_G4);
-  delay(note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_G4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_C5);
-  delay(note_8+note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_G4);
-  delay(note_16);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_G4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-  
-  tone(buzz,NOTE_G4);
-  delay(note_4/3);
-  tone(buzz,NOTE_F4);
-  delay(note_4/3);  
-  tone(buzz,NOTE_G4);
-  delay(note_4/3);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_C4);
-  delay(note_4);  
-  noTone(buzz);
-  delay(50);
-
-  tone(buzz,NOTE_C4);
-  delay(note_2);  
-  noTone(buzz);
-  delay(50);
-  //우리는 영원한 조국의 방패
   tone(buzz,NOTE_C4);
   delay(note_8+note_16);  
   noTone(buzz);
@@ -566,11 +237,17 @@ int get_water(){  // 이상 상태면 1 정상이면 0
   Serial.print("Water Sensor: ");
   Serial.println(sensorValue);
   if(sensorValue > 550) {
+    watering.attach(5);
     watering.write(90);
+    //delay(120);
+    //watering.detach();
     return 0;
   }
   else if (sensorValue <500) {
+    watering.attach(5);
     watering.write(0);
+    //delay(120);
+    //watering.detach();
     return 1;
   }
 }
@@ -603,14 +280,33 @@ void loop() {
       song_played = 1;
       song();
     }
+    if(BTSerial.available()) {
+      BTSerial.read();
+          watering.detach();
+      BTSerial.write("T T T:");
+    }
   }
   else{
     lcd.print("Growing......");
     digitalWrite(LED_G,LOW);
     song_played = 0;
     if(water_sensor == 1) {
-      if(light_sensor == 0) noTone(buzz);
-      else tone(buzz,131);
+      if(light_sensor == 0) {
+        noTone(buzz);
+        if(BTSerial.available()) {
+          BTSerial.read();
+          watering.detach();
+          BTSerial.write("F T F:"); // Water, Light, Grow
+        }
+      }
+      else {
+        tone(buzz,131);
+        if(BTSerial.available()) {
+          BTSerial.read();
+          watering.detach();
+          BTSerial.write("F F F:"); // Water, Light, Grow
+        }
+      }
       digitalWrite(LED_R, HIGH);
       digitalWrite(LED_B, LOW);
     }
@@ -618,11 +314,21 @@ void loop() {
       tone(buzz,131);
       digitalWrite(LED_R, HIGH);
       digitalWrite(LED_B, LOW);
+      if(BTSerial.available()) {
+        BTSerial.read();
+          watering.detach();
+        BTSerial.write("T F F:");
+      }
     }
     else{
       noTone(buzz);
       digitalWrite(LED_R, LOW);
       digitalWrite(LED_B, HIGH);
+      if(BTSerial.available()) {
+        BTSerial.read();
+          watering.detach();
+        BTSerial.write("T T F:");
+      }
     }
   }
   lcd.setCursor(0,0);
