@@ -1,0 +1,431 @@
+/*
+  tone(buzz,NOTE_F4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  tone(buzz,NOTE_G4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C4);
+  delay(note_4+note_2);
+  noTone(buzz);
+  delay(50+note_4);
+  //백두산 정기뻗은 삼천리 강산
+  
+  tone(buzz,NOTE_D4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_AS4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_16+note_8);
+  tone(buzz,NOTE_G4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);
+  tone(buzz,NOTE_A4);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_2);
+  noTone(buzz);
+  delay(50+note_4);
+  // 무궁화 대한으 온 누리의 빛
+  tone(buzz,NOTE_F4);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_4+note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_16+note_8);
+  tone(buzz,NOTE_D5);
+  delay(note_16);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4);
+  tone(buzz,NOTE_A4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4);  
+  tone(buzz,NOTE_C5);
+  delay(note_8);
+  tone(buzz,NOTE_D5);
+  delay(note_8);  
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_G4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+ // 화랑의 핏줄타고 자라난 우리
+  tone(buzz,NOTE_C5);
+  delay(note_4+note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_AS4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_8);
+  tone(buzz,NOTE_F4);
+  delay(note_8);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_C5);
+  delay(note_2);
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  tone(buzz,NOTE_C5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+ 
+  tone(buzz,NOTE_F4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //그 이름 용감하다 대 한 육군
+  */
+  tone(buzz,NOTE_A4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_A4);
+  delay(note_4/3);
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_A4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //앞으로 앞으로 용진또용진
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);
+  tone(buzz,NOTE_F4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_G4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //우리는 영원한 조국의 방패
+  tone(buzz,NOTE_C4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_C4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_E4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_F4);
+  delay(note_4/3);
+  tone(buzz,NOTE_E4);
+  delay(note_4/3);  
+  tone(buzz,NOTE_D4);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //앞으로 앞으로 용진또용진(2)
+  tone(buzz,NOTE_D5);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_G4);
+  delay(note_8+note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_A4);
+  delay(note_16);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_D5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+  
+  tone(buzz,NOTE_D5);
+  delay(note_4/3);
+  tone(buzz,NOTE_C5);
+  delay(note_4/3);  
+  tone(buzz,NOTE_D5);
+  delay(note_4/3);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F5);
+  delay(note_4);  
+  noTone(buzz);
+  delay(50);
+
+  tone(buzz,NOTE_F5);
+  delay(note_2);  
+  noTone(buzz);
+  delay(50);
+  //우리는 영원한 조국의 방패
