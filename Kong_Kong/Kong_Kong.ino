@@ -256,7 +256,7 @@ int get_light(){
   sensorValue = analogRead(light_pin);
   Serial.print("Light Sensor: ");
   Serial.println(sensorValue);
-  if(sensorValue > 740) return 1;
+  if(sensorValue < 450) return 1;
   else return 0;
 }
 int get_human(){
@@ -264,11 +264,22 @@ int get_human(){
  else return 0;
 }
 
+void water_force(){
+  watering.attach(5);
+  watering.write(0);
+  Serial.println("Force Watering");
+  delay(1000);
+  watering.write(90);
+  delay(1000);
+  watering.detach();
+}
+
 void loop() {
   tick++;
   int water_sensor = get_water();
   int light_sensor = get_light();
   int h = get_height();
+  char cmd = '\0';
   
   lcd.setCursor(0,1);
   if(h == 1){
@@ -276,14 +287,15 @@ void loop() {
     digitalWrite(LED_G,HIGH);
     digitalWrite(LED_R,LOW);
     digitalWrite(LED_B,LOW);
+    if(BTSerial.available()) {
+      cmd = BTSerial.read();
+      Serial.println(cmd);
+      watering.detach();
+      BTSerial.write("T-T-T:");
+    }
     if(song_played == 0) {
       song_played = 1;
       song();
-    }
-    if(BTSerial.available()) {
-      BTSerial.read();
-          watering.detach();
-      BTSerial.write("T T T:");
     }
   }
   else{
@@ -294,17 +306,19 @@ void loop() {
       if(light_sensor == 0) {
         noTone(buzz);
         if(BTSerial.available()) {
-          BTSerial.read();
+          cmd = BTSerial.read();
+          Serial.println(cmd);
           watering.detach();
-          BTSerial.write("F T F:"); // Water, Light, Grow
+          BTSerial.write("F-T-F:"); // Water, Light, Grow
         }
       }
       else {
         tone(buzz,131);
         if(BTSerial.available()) {
-          BTSerial.read();
+          cmd = BTSerial.read();
+          Serial.println(cmd);
           watering.detach();
-          BTSerial.write("F F F:"); // Water, Light, Grow
+          BTSerial.write("F-F-F:"); // Water, Light, Grow
         }
       }
       digitalWrite(LED_R, HIGH);
@@ -315,9 +329,10 @@ void loop() {
       digitalWrite(LED_R, HIGH);
       digitalWrite(LED_B, LOW);
       if(BTSerial.available()) {
-        BTSerial.read();
-          watering.detach();
-        BTSerial.write("T F F:");
+        cmd = BTSerial.read();
+        Serial.println(cmd);
+        watering.detach();
+        BTSerial.write("T-F-F:");
       }
     }
     else{
@@ -325,9 +340,10 @@ void loop() {
       digitalWrite(LED_R, LOW);
       digitalWrite(LED_B, HIGH);
       if(BTSerial.available()) {
-        BTSerial.read();
-          watering.detach();
-        BTSerial.write("T T F:");
+        cmd = BTSerial.read();
+        Serial.println(cmd);
+        watering.detach();
+        BTSerial.write("T-T-F:");
       }
     }
   }
@@ -347,6 +363,10 @@ void loop() {
   }
   else if(tick - lcd_stat > 12) {
     lcd.noBacklight();
+  }
+  if(cmd == '1') {
+    cmd = '\0';
+    water_force();
   }
   delay(250);
 }
